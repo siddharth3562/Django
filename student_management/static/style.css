@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: aquamarine;
+}
+
+ table,td,th{
+    border: 1px solid black;
+}
+
+.formm{
+    width: 30vw;
+    height: 40vh;
+    background-color: rgb(4, 71, 48);
+}
