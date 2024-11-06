@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-
+from .models import *
 std=[]
 
 def home(req):
@@ -7,29 +7,26 @@ def home(req):
         roll=req.POST['roll_no']
         name=req.POST['name']
         age=req.POST['age']
-        std.append({'roll_no':roll,'name':name,'age':age})
+        # std.append({'roll_no':roll,'name':name,'age':age})
+        data=Student.objects.create(roll_no=roll,name=name,age=age)
+        data.save()
         return redirect(home)
     else:
-        return render(req,'home.html',{'students':std})
+        data=Student.objects.all()
+        return render(req,'home.html',{'students':data})
 
-def edit_std(req,a):
-    data=''
-    for i in std:
-        if i['roll_no']==a:
-            data=i
+def edit_std(req,id):
     if req.method=='POST':
         roll=req.POST['roll_no']
         name=req.POST['name']
         age=req.POST['age']
-        data['roll_no']=roll
-        data['name']=name
-        data['age']=age
+        Student.objects.filter(pk=id).update(roll_no=roll,name=name,age=age)
         return redirect(home)
     else:
+        data=Student.objects.get(pk=id)
         return render(req,'edit.html',{'data':data})
     
-def delete(req,a):
-    for i in std:
-        if i['roll_no']==a:
-            std.remove(i)
+def delete(req,id):
+    data=Student.objects.get(pk=id)
+    data.delete()
     return redirect(home)

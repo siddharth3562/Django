@@ -27,17 +27,19 @@
 
     <table>
         <tr>
+            <th>id</th>
             <th>Roll no</th>
             <th>Name</th>
             <th>Age</th>
         </tr>
         {% for std in students %}
         <tr>
+            <td>{{std.pk}}</td>
             <td>{{std.roll_no}}</td>
             <td>{{std.name}}</td>
             <td>{{std.age}}</td>
             <td>
-                <a href="edit/{{std.roll_no}}"><i class="fa-solid fa-pen"></i></a>
+                <a href="edit/{{std.pk}}"><i class="fa-solid fa-pen"></i></a>
             </td>
             <td>
                 <a href="delete/{{std.roll_no}}"><i class="fas fa-trash"></i></a>
